@@ -2,9 +2,8 @@ package com.user;
 
 import com.user.bean.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-
-import javax.annotation.Resource;
 
 /**
  * 出生不同: @Autowired 来自 Spring 框架, @Resource 来自 JDK
@@ -12,23 +11,18 @@ import javax.annotation.Resource;
  * 功能不同: 相比于 @Autowired, @Resource 支持更多的参数设置, 例如 name设置, 根据名称获取 Bean
  */
 @Controller
-public class UserController {
-
-    public void seyHello(String name){
-        System.out.println("UserController Say Hello "+name);
-    }
+public class UserControllerB {
 
     /**
      * 属性注入 :
      * 优点: 简洁, 使用方便
      * 缺点: 只能用于 IoC 容器, 如果是非 IoC 容器不可用, 并且只有在使用的时候才会出现 NPE (空指针异常)
      */
-//    @Autowired
-    @Resource
-    public UserService userService;
+    @Autowired
+    @Qualifier(value = "getUser1")
+//    @Resource(name = "getUser2")
+    public User user;
 
-    public User findUserById(int id){
-        return id<=0?new User():userService.findUserById(id);
-    }
+    public User getUser(){ return user; }
 
 }

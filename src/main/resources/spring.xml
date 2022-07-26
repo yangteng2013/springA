@@ -6,5 +6,7 @@
 
     <!-- 配置 Spring 扫描的根路径（此根路径下的所有 Spring 存对象的注解才能生效） -->
     <content:component-scan base-package="com.user"></content:component-scan>
-
+    <beans>
+        <bean id="beanLifeComponent" class="com.user.util.BeanLifecycleComponent" init-method="init" destroy-method="destroy"></bean>
+    </beans>
 </beans>
