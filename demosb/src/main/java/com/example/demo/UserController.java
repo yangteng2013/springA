@@ -91,6 +91,7 @@ public class UserController {
     public String uploadPath;
 
     @RequestMapping(value = "/upload",method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @ResponseBody
     public String uploadFile(@RequestPart("file") MultipartFile file) throws IOException {
         // 1. 上传文件目录
         String basePath = uploadPath;
