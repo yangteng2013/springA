@@ -1,16 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.bean.Blog;
 import com.example.demo.bean.User;
 import com.example.demo.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.awt.*;
 import java.util.List;
 
 @RestController
@@ -27,8 +26,8 @@ public class UserController3 {
      */
     @RequestMapping("/getAllUser")
     @ResponseBody
-    public List<User> getAll(){
-        return userService.getAll();
+    public List<User> getAllUser(){
+        return userService.getAllUser();
     }
 
     /**
@@ -80,5 +79,23 @@ public class UserController3 {
     public Integer delete(User user){
         return userService.delete(user);
     }
+
+
+
+    @RequestMapping("/getAllBlog")
+    public List<Blog> getAllBlog(){
+        return userService.getAllBlog();
+    }
+
+    /**
+     * http://localhost:9090/user3/getBlogsByUserId?userId=3
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/getBlogsByUserId")
+    public List<Blog>getBlogsByUserId(int userId){
+        return userService.getBlogsByUserId(userId);
+    }
+
 
 }

@@ -2,7 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
-    <select id="getAll" resultType="com.example.demo.bean.User">
+    <resultMap id="baseMap" type="com.example.demo.bean.User">
+        <id column="userId" property="userId"></id>
+        <id column="username" property="username"></id>
+        <id column="password" property="password"></id>
+        <id column="blogNumbers" property="blogNumbers"></id>
+        <id column="imageUrl" property="imageUrl"></id>
+    </resultMap>
+    <resultMap id="BaseMap" type="com.example.demo.bean.Blog">
+        <id column="blogId" property="blogId"></id>
+        <result column="title" property="title"></result>
+        <result column="content" property="content"></result>
+        <result column="postTime" property="postTime"></result>
+        <result column="userId" property="userId"></result>
+        <association property="user"
+                     resultMap="com.example.demo.mapper.UserMapper.baseMap"
+                     columnPrefix="u_">
+        </association>
+    </resultMap>
+    <resultMap id="BaseMap2" type="com.example.demo.bean.Blog">
+        <id column="blogId" property="blogId"></id>
+        <result column="title" property="title"></result>
+        <result column="content" property="content"></result>
+        <result column="postTime" property="postTime"></result>
+        <result column="userId" property="userId"></result>
+        <collection property="user"
+                     resultMap="com.example.demo.mapper.UserMapper.baseMap"
+                     columnPrefix="u_">
+        </collection>
+    </resultMap>
+    <select id="getBlogByUserId" resultMap="BaseMap2">
+        select b.*,u.username u_username,u.userId u_userId,u.password u_password
+        from blog b left join user u
+        on b.userId=u.userId
+        where u.userId=#{userId};
+    </select>
+    <select id="getAllBlog" resultMap="BaseMap">
+        select b.*,u.userId u_userId,u.username u_username,u.password u_password
+        from blog b left join user u
+        on u.userId=b.userId;
+    </select>
+    <select id="getAllUser" resultType="com.example.demo.bean.User">
         select * from user;
     </select>
     <insert id="insert" useGeneratedKeys="true" keyProperty="userId" keyColumn="userId">
@@ -26,5 +66,8 @@
     <delete id="delete">
         delete from user where userId=#{userId}
     </delete>
+
+
+
 </mapper>
 

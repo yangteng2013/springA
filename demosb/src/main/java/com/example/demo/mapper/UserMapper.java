@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.bean.Blog;
 import com.example.demo.bean.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -10,7 +11,7 @@ import java.util.List;
  */
 @Mapper
 public interface UserMapper {
-    List<User> getAll();
+    List<User> getAllUser();
 
     /**
      *
@@ -29,4 +30,8 @@ public interface UserMapper {
     Integer updateByName(User user);
 
     Integer delete(User user);
+
+    List<Blog> getAllBlog();
+
+    List<Blog> getBlogByUserId(int userId);
 }

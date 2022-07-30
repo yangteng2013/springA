@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.bean.Blog;
 import com.example.demo.bean.User;
 import com.example.demo.mapper.UserMapper;
 import org.springframework.stereotype.Service;
@@ -13,8 +14,8 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
-    public List<User> getAll(){
-        return userMapper.getAll();
+    public List<User> getAllUser(){
+        return userMapper.getAllUser();
     }
 
     public Integer insert(User user) {
@@ -43,5 +44,13 @@ public class UserService {
 
     public Integer delete(User user) {
         return userMapper.delete(user);
+    }
+
+    public List<Blog> getAllBlog() {
+        return userMapper.getAllBlog();
+    }
+
+    public List<Blog> getBlogsByUserId(int userId) {
+        return userMapper.getBlogByUserId(userId);
     }
 }
